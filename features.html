@@ -3,43 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Technology & AI | Amazon Echo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Technology & AI Innovations | Amazon Echo 2026</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: #111827;
-            --accent-cyan: #06b6d4;
-            --accent-blue: #3b82f6;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
+            --bg-color: #060913;
+            --card-bg: rgba(15, 23, 42, 0.85);
+            --card-border: rgba(56, 189, 248, 0.25);
+            --accent-cyan: #38bdf8;
+            --accent-blue: #6366f1;
+            --accent-purple: #a855f7;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Kanit', sans-serif; }
-        body { background: var(--bg-color); color: var(--text-main); }
-        
-        nav { display: flex; justify-content: space-between; padding: 1.2rem 5%; background: rgba(11,15,25,0.8); position: fixed; width: 100%; top: 0; }
-        .logo { font-size: 1.5rem; font-weight: 700; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .nav-links { display: flex; list-style: none; gap: 20px; }
-        .nav-links a { color: var(--text-main); text-decoration: none; }
-        .nav-links a.active { color: var(--accent-cyan); }
 
-        .content { padding: 120px 5% 60px; max-width: 1000px; margin: 0 auto; }
-        h1 { font-size: 2.2rem; color: var(--accent-cyan); margin-bottom: 20px; text-align: center; }
-        
-        .feature-box {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(255,255,255,0.05);
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Kanit', sans-serif;
         }
-        .feature-box h3 { color: var(--accent-blue); margin-bottom: 15px; }
-        .feature-box ul { padding-left: 20px; color: var(--text-muted); }
-        .feature-box li { margin-bottom: 10px; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(6, 9, 19, 0.85);
+            backdrop-filter: blur(12px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 400;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Header */
+        .page-header {
+            padding: 140px 5% 40px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Content Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px 5% 80px;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 35px;
+            margin-bottom: 35px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .section-card h2 {
+            font-size: 1.8rem;
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-card p {
+            color: #cbd5e1;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        /* Grid Feature Boxes */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .sub-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .sub-box:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .sub-box h3 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .sub-box p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        /* Highlight Code / Equation Box */
+        .math-box {
+            background: #020617;
+            border-left: 4px solid var(--accent-purple);
+            padding: 18px 24px;
+            border-radius: 8px;
+            font-family: monospace;
+            color: #e2e8f0;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+
+        /* Bullet List */
+        .info-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .info-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            color: #cbd5e1;
+        }
+
+        .info-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
 
+    <!-- Navigation -->
     <nav>
         <div class="logo">AMAZON ECHO 2026</div>
         <ul class="nav-links">
@@ -49,23 +215,80 @@
         </ul>
     </nav>
 
-    <div class="content">
-        <h1>สถาปัตยกรรม และ เทคโนโลยี AI</h1>
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1>นวัตกรรม & โครงสร้างปัญญาประดิษฐ์</h1>
+        <p>สรุปรายละเอียดการศึกษานวัตกรรมเทคโนโลยี AI, โมเดลการเรียนรู้ และสถาปัตยกรรมระบบ Amazon Echo จากงานวิจัยและสไลด์นำเสนอโปรเจกต์</p>
+    </header>
 
-        <div class="feature-box">
-            <h3>1. ชิปประมวลผล AZ3 Series (Edge Computing)</h3>
-            <p style="color: var(--text-muted);">ช่วยให้ลำโพงประมวลผลคำสั่งเสียง AI บนตัวเครื่องได้อย่างรวดเร็ว ไม่ต้องพึ่งพา Cloud ตอบสนองทันทีแบบ Real-time</p>
+    <div class="container">
+
+        <!-- Section 1: AI Machine Learning Models -->
+        <div class="section-card">
+            <h2>🧠 1. โมเดลการเรียนรู้ AI (Learning Models)</h2>
+            <p>โครงสร้างปัญญาประดิษฐ์ใน Amazon Echo เจนเนอเรชันปี 2026 ถูกออกแบบขึ้นจากโมเดลการประมวลผลภาษาธรรมชาติ (NLP) และระบบตอบสนองอัจฉริยะที่แบ่งออกเป็น 2 รูปแบบหลักตามสไลด์งานวิจัย:</p>
+            
+            <div class="grid-2">
+                <div class="sub-box">
+                    <h3>⚡ Zero-Shot AI Learning</h3>
+                    <p>ระบบสามารถเข้าใจคำสั่งใหม่ที่ไม่เคยถูกเทรนมาก่อนได้ทันที โดยวิเคราะห์บริบทและความหมายของประโยคด้วย Large Language Models (LLM) บนคลาวด์ ช่วยให้ผู้ใช้สั่งงานด้วยภาษาธรรมชาติโดยไม่ต้องจำคีย์เวิร์ด</p>
+                </div>
+                <div class="sub-box">
+                    <h3>🎯 Few-Shot AI Learning</h3>
+                    <p>โมเดลปรับตัวตามพฤติกรรมเฉพาะบุคคล โดยใช้ตัวอย่างการใช้งานเพียงเล็กน้อย (1-2 ครั้ง) เพื่อจดจำความชอบ เสียงของผู้ใช้ หรือแพทเทิร์นการสั่งงานในชีวิตประจำวันอย่างแม่นยำ</p>
+                </div>
+            </div>
         </div>
 
-        <div class="feature-box">
-            <h3>2. ระบบ Smart Home Hub Integrated</h3>
-            <ul>
-                <li>รองรับโปรโตคอล Zigbee, Matter และ Thread</li>
-                <li>ควบคุมไฟ Smart Relay, สวิตช์ และลำโพงอัจฉริยะภายในบ้าน</li>
-                <li>ตั้งค่าการทำงานอัตโนมัติ (Routines) เช่น พูดว่า "Alexa, Good Morning" เพื่อเปิดไฟและรายงานข่าว</li>
+        <!-- Section 2: Mathematical Foundation & Desmos -->
+        <div class="section-card">
+            <h2>📐 2. การแบบจำลองทางคณิตศาสตร์ (Desmos Analysis)</h2>
+            <p>เพื่อวิเคราะห์ประสิทธิภาพการตรวจจับคลื่นเสียง (Acoustic Waveform) และระยะตอบสนองของไมโครโฟนอาร์เรย์ (Microphone Array) ทางโปรเจกต์ได้นำสมการคณิตศาสตร์มาจำลองรูปแบบผ่าน Desmos:</p>
+            
+            <div class="math-box">
+                f(x) = A · sin(B(x - C)) + D
+            </div>
+
+            <ul class="info-list">
+                <li><strong>Acoustic Wave Dynamics:</strong> ใช้สมการคลื่นไซน์ (Sine Wave) ในการจำลองการรับสัญญาณเสียงรบกวนรอบข้าง (Background Noise) เพื่อตัดเสียงแทรกด้วยเทคโนโลยี Active Noise Cancellation</li>
+                <li><strong>Beamforming Optimization:</strong> ใช้สมการการกระจายตัวแบบเกาส์เซียน (Gaussian Distribution) คำนวณทิศทางของเสียงพูดผู้ใช้ เพื่อหมุนจุดรับสัญญาณของไมโครโฟนไปหามนุษย์โดยอัตโนมัติ</li>
             </ul>
         </div>
+
+        <!-- Section 3: System Architecture (Mermaid Diagram Summary) -->
+        <div class="section-card">
+            <h2>ระบบการทำงาน (System Architecture Workflow)</h2>
+            <p>สรุปไดอะแกรมขั้นตอนการประมวลผลระบบ Amazon Echo (ตามผัง Mermaid Diagram ในสไลด์พรีเซนชัน):</p>
+
+            <ul class="info-list">
+                <li><strong>Step 1 (Audio Input):</strong> ไมโครโฟนดักจับคำสั่งเสียงและแปลงสัญญาณ Analog เป็น Digital Signal ผ่านชิป Edge Processor</li>
+                <li><strong>Step 2 (Wake Word Detection):</strong> ชิป AZ3 Pro ตรวจสอบคำว่า "Alexa" ทันทีในอุปกรณ์ (Local Processing) โดยไม่ต้องใช้อินเทอร์เน็ต เพื่อความรวดเร็วและปลอดภัย</li>
+                <li><strong>Step 3 (Cloud Natural Language Understanding):</strong> คำสั่งเสียงถูกส่งต่อไปยัง AWS Cloud เพื่อแปลงเสียงเป็นข้อความ (STT) และวิเคราะห์เจตนา (Intent Classification)</li>
+                <li><strong>Step 4 (Action & Ambient Automation):</strong> ส่งคำสั่งกลับมาควบคุมอุปกรณ์ IoT ในบ้าน หรือประมวลผลคำตอบด้วยระบบสังเคราะห์เสียงสังเคราะห์ (TTS)</li>
+            </ul>
+        </div>
+
+        <!-- Section 4: Privacy & Matter Ecosystem -->
+        <div class="section-card">
+            <h2>🛡️ 4. ความปลอดภัย & ระบบนิเวศ Matter Ecosystem</h2>
+            <div class="grid-2">
+                <div class="sub-box">
+                    <h3>🔒 Privacy Control</h3>
+                    <p>ระบบสวิตช์ตัดการทำงานของไมโครโฟนและกล้องในระดับฮาร์ดแวร์ (Hardware Disconnect) พร้อมไฟแจ้งเตือนสีส้มเพื่อความมั่นใจในความเป็นส่วนตัวระดับสูงสุด</p>
+                </div>
+                <div class="sub-box">
+                    <h3>🌐 Matter & Thread Standard</h3>
+                    <p>รองรับโปรโตคอลการเชื่อมต่อ Smart Home มาตรฐานกลาง สามารถสั่งงานอุปกรณ์ข้ามแบรนด์ (เช่น Apple, Google, Zigbee) ได้แบบไม่มีสะดุด</p>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+    <footer>
+        <p>© 2026 GE931 Introduction to Artificial Intelligence Project</p>
+        <p style="font-size: 0.8rem; margin-top: 5px; color: var(--accent-cyan);">Prepared by Suthatta Thanagard (2610717302036)</p>
+    </footer>
 
 </body>
 </html>
