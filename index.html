@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amazon Echo 2026 | Smart Speaker Experience</title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #060913;
-            --card-bg: rgba(15, 23, 42, 0.8);
-            --card-border: rgba(56, 189, 248, 0.2);
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --card-border: rgba(56, 189, 248, 0.25);
             --accent-cyan: #38bdf8;
             --accent-blue: #6366f1;
             --accent-purple: #a855f7;
@@ -29,16 +30,70 @@
             color: var(--text-main);
             overflow-x: hidden;
             line-height: 1.6;
+            position: relative;
         }
 
-        /* Navigation */
+        /* Animated Dynamic Background */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.45;
+            animation: float 18s infinite ease-in-out alternate;
+        }
+
+        .orb-1 {
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, var(--accent-cyan), transparent);
+            top: -10%;
+            left: -10%;
+            animation-duration: 16s;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-purple), transparent);
+            bottom: 10%;
+            right: -10%;
+            animation-duration: 22s;
+        }
+
+        .orb-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, var(--accent-blue), transparent);
+            top: 45%;
+            left: 30%;
+            animation-duration: 19s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(60px, 40px) scale(1.1); }
+            100% { transform: translate(-40px, 80px) scale(0.95); }
+        }
+
+        /* Navigation Bar */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1.2rem 8%;
             background: rgba(6, 9, 19, 0.85);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(16px);
             position: fixed;
             width: 100%;
             top: 0;
@@ -59,6 +114,7 @@
             display: flex;
             list-style: none;
             gap: 28px;
+            align-items: center;
         }
 
         .nav-links a {
@@ -73,17 +129,58 @@
             text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
         }
 
+        .btn-nav-pres {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #fff !important;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 500 !important;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
         /* Hero Section */
         .hero {
-            padding: 160px 8% 80px;
-            text-align: center;
-            position: relative;
+            padding: 150px 8% 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            max-width: 1280px;
+            margin: 0 auto;
+            min-height: 85vh;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 650px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 20px;
+            color: var(--accent-cyan);
+            font-size: 0.88rem;
+            font-weight: 500;
+            margin-bottom: 20px;
         }
 
         .hero h1 {
             font-size: 3.2rem;
             font-weight: 700;
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            line-height: 1.25;
+            background: linear-gradient(90deg, var(--accent-cyan), #ffffff, var(--accent-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
@@ -91,15 +188,13 @@
 
         .hero p {
             color: var(--text-muted);
-            max-width: 750px;
-            margin: 0 auto 35px;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
+            margin-bottom: 35px;
         }
 
         .hero-btns {
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            gap: 18px;
             flex-wrap: wrap;
         }
 
@@ -112,6 +207,9 @@
             font-weight: 600;
             transition: 0.3s;
             box-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn-primary:hover {
@@ -128,162 +226,418 @@
             text-decoration: none;
             font-weight: 500;
             transition: 0.3s;
+            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.12);
             border-color: var(--accent-cyan);
         }
 
-        /* Features Section */
+        /* Product Image Visual */
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .product-img-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 420px;
+            border-radius: 30px;
+            padding: 15px;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(168, 85, 247, 0.1));
+            border: 1px solid var(--card-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            animation: pulse-glow 4s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 15px 35px rgba(56, 189, 248, 0.2); }
+            100% { box-shadow: 0 25px 50px rgba(168, 85, 247, 0.4); }
+        }
+
+        .product-img {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            display: block;
+            object-fit: cover;
+        }
+
+        .soundwave-ring {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            border: 2px stroke var(--accent-cyan);
+            border-radius: 40px;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        /* Features Grid Section */
         .features {
-            padding: 60px 8%;
-            max-width: 1200px;
+            padding: 80px 8%;
+            max-width: 1280px;
             margin: 0 auto;
         }
 
-        .section-title {
+        .section-header {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 50px;
-            color: var(--text-main);
+            margin-bottom: 60px;
         }
 
-        .grid {
+        .section-header h2 {
+            font-size: 2.3rem;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--text-main));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            padding: 35px 25px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            transition: 0.3s;
+            padding: 35px 28px;
+            border-radius: 24px;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s ease;
         }
 
         .card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--accent-cyan);
-            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.15);
+            box-shadow: 0 12px 30px rgba(56, 189, 248, 0.2);
         }
 
         .card-icon {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 20px;
+            display: inline-block;
         }
 
         .card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
+            font-size: 1.35rem;
+            margin-bottom: 14px;
             color: var(--accent-cyan);
         }
 
         .card p {
             color: var(--text-muted);
             font-size: 0.98rem;
+            line-height: 1.7;
         }
 
-        /* Presentation Banner Section */
+        /* Deep Dive Details Section */
+        .details-section {
+            padding: 60px 8%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .detail-row {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 80px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 40px;
+            border-radius: 28px;
+            backdrop-filter: blur(12px);
+        }
+
+        .detail-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .detail-text {
+            flex: 1;
+        }
+
+        .detail-text h3 {
+            font-size: 1.8rem;
+            color: var(--text-main);
+            margin-bottom: 16px;
+        }
+
+        .detail-text p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+        }
+
+        .detail-list {
+            list-style: none;
+        }
+
+        .detail-list li {
+            color: var(--text-main);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .detail-list li::before {
+            content: "✓";
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        .detail-img-box {
+            flex: 1;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+        }
+
+        .detail-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Presentation Callout Banner */
         .pres-banner {
-            max-width: 1040px;
-            margin: 60px auto 80px;
+            max-width: 1100px;
+            margin: 40px auto 100px;
             padding: 0 8%;
         }
 
         .banner-card {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
-            border: 1px solid var(--accent-cyan);
-            border-radius: 24px;
-            padding: 40px;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+            border: 1.5px solid var(--accent-cyan);
+            border-radius: 28px;
+            padding: 50px 40px;
             text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
         }
 
         .banner-card h2 {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+            font-size: 2.2rem;
+            margin-bottom: 16px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue), var(--accent-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .banner-card p {
             color: var(--text-muted);
-            margin-bottom: 25px;
-            font-size: 1.05rem;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
+        /* Footer */
         footer {
             text-align: center;
             padding: 40px 5%;
             color: var(--text-muted);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.92rem;
+            background: rgba(6, 9, 19, 0.95);
+        }
+
+        /* Responsive Mobile Styles */
+        @media (max-width: 992px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 130px;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero-btns {
+                justify-content: center;
+            }
+
+            .detail-row, .detail-row.reverse {
+                flex-direction: column;
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(6, 9, 19, 0.98);
+                padding: 20px 0;
+                border-bottom: 1px solid var(--card-border);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .banner-card {
+                padding: 35px 20px;
+            }
+
+            .banner-card h2 {
+                font-size: 1.7rem;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- Dynamic Animated Background Orbs -->
+    <div class="ambient-bg">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
     <!-- Navigation Bar -->
     <nav>
         <div class="logo">AMAZON ECHO 2026</div>
-        <ul class="nav-links">
+        <button class="mobile-menu-btn" id="mobile-toggle">☰</button>
+        <ul class="nav-links" id="nav-menu">
             <li><a href="index.html" class="active">หน้าแรก</a></li>
             <li><a href="features.html">นวัตกรรม</a></li>
             <li><a href="products.html">สินค้า & ราคา</a></li>
-            <li><a href="presentation.html" style="color: var(--accent-cyan); font-weight: 600;">📊 ดูสไลด์พรีเซนต์</a></li>
+            <li><a href="presentation.html" class="btn-nav-pres">📊 ดูสไลด์พรีเซนต์</a></li>
         </ul>
     </nav>
 
     <!-- Hero Section -->
     <section class="hero">
-        <h1>อนาคตแห่งเสียงและสมาร์ทโฮมด้วย Amazon Echo</h1>
-        <p>ยกระดับวิถีชีวิตด้วยลำโพงอัจฉริยะระบบปัญญาประดิษฐ์ สั่งการบ้านด้วยเสียง ตอบสนองฉับไวด้วยสถาปัตยกรรม AI ล่าสุดแห่งปี 2026</p>
-        <div class="hero-btns">
-            <a href="products.html" class="btn-primary">เลือกซื้อผลิตภัณฑ์</a>
-            <a href="presentation.html" class="btn-secondary">📊 รับชมสไลด์นำเสนอ (PDF Slide)</a>
+        <div class="hero-content">
+            <span class="hero-badge">✨ Next-Generation Smart Speaker Ecosystem</span>
+            <h1>อนาคตแห่งเสียงและระบบสมาร์ทโฮมด้วย Amazon Echo</h1>
+            <p>ยกระดับวิถีชีวิตในบ้านด้วยลำโพงอัจฉริยะขวัญใจคนทั่วโลก สั่งการเสียงภาษาไทย ตอบสนองฉับไวด้วยสถาปัตยกรรม Generative AI ล่าสุดแห่งปี 2026</p>
+            <div class="hero-btns">
+                <a href="products.html" class="btn-primary">เลือกซื้อผลิตภัณฑ์ ❯</a>
+                <a href="presentation.html" class="btn-secondary">📊 รับชมสไลด์พรีเซนต์ (PDF)</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="product-img-wrapper">
+                <img src="https://images.unsplash.com/photo-1543512214-318c7553f230?auto=format&fit=crop&w=800&q=80" alt="Amazon Echo Product" class="product-img">
+            </div>
         </div>
     </section>
 
-    <!-- Product Highlights Section -->
+    <!-- Product Key Highlights -->
     <section class="features">
-        <h2 class="section-title">นวัตกรรมเด่นใน Amazon Echo</h2>
-        <div class="grid">
+        <div class="section-header">
+            <h2>ทำไมต้องเป็น Amazon Echo 2026?</h2>
+            <p>สัมผัสเทคโนโลยีอัจฉริยะที่ผสมผสานดีไซน์เรียบหรูและปัญญาประดิษฐ์ระดับสูง</p>
+        </div>
+        <div class="grid-3">
             <div class="card">
                 <div class="card-icon">🧠</div>
                 <h3>Next-Gen Alexa AI</h3>
-                <p>สมองกลปัญญาประดิษฐ์รุ่นใหม่ เข้าใจบริบทการสนทนาภาษาไทยและภาษาอังกฤษได้อย่างเป็นธรรมชาติและแม่นยำยิ่งขึ้น</p>
+                <p>ระบบสมองกลปัญญาประดิษฐ์แบบ Generative AI จดจำบริบทการสนทนาได้ต่อเนื่อง สั่งงานภาษาไทยและอังกฤษได้อย่างลื่นไหลเป็นธรรมชาติ</p>
             </div>
             <div class="card">
                 <div class="card-icon">🔊</div>
                 <h3>Spatial Audio System</h3>
-                <p>ระบบเสียงทรงพลังแบบ 360 องศา พร้อมเทคโนโลยีปรับแต่ง acoustics ให้เหมาะสมกับขนาดและรูปทรงของห้องโดยอัตโนมัติ</p>
+                <p>พลังเสียงคมชัดครบทุกมิติด้วยระบบ Spatial Audio ปรับแต่งสมดุลเสียง (Acoustic Auto-Tuning) ตามขนาดและทรงของห้องโดยอัตโนมัติ</p>
             </div>
             <div class="card">
                 <div class="card-icon">🏠</div>
                 <h3>Smart Home Hub</h3>
-                <p>เชื่อมต่อและควบคุมอุปกรณ์สมาร์ทโฮมภายในบ้านได้อย่างครอบคลุม รองรับมาตรฐาน Matter และ Zigbee ในตัว</p>
+                <p>ศูนย์กลางการควบคุมบ้านอัจฉริยะในเครื่องเดียว รองรับโปรโตคอล Matter, Zigbee และ Thread เชื่อมต่อหลอดไฟ แอร์ และกล้องวงจรปิดได้ทันที</p>
             </div>
         </div>
     </section>
 
-    <!-- Interactive Slide Banner -->
+    <!-- Deep Dive Product Experience -->
+    <section class="details-section">
+        <div class="detail-row">
+            <div class="detail-text">
+                <h3>การตอบสนองที่ชาญฉลาด ตอบโจทย์ทุกไลฟ์สไตล์</h3>
+                <p>ไม่เพียงแค่การเปิดเพลง Amazon Echo พร้อมเป็นผู้ช่วยส่วนตัวที่ช่วยจัดการตารางงาน แจ้งเตือนข่าวสาร และควบคุมบรรยากาศในบ้านผ่านการสั่งการด้วยเสียงเพียงคำเดียว</p>
+                <ul class="detail-list">
+                    <li>รองรับการสั่งการด้วยเสียงภาษาไทยเต็มรูปแบบ</li>
+                    <li>ระบบตรวจจับเสียงระยะไกล (Far-Field Microphone) แปดทิศทาง</li>
+                    <li>ความเป็นส่วนตัวสูงสุด พร้อมสวิตช์ปิดไมโครโฟนด้วยฮาร์ดแวร์</li>
+                </ul>
+            </div>
+            <div class="detail-img-box">
+                <img src="https://images.unsplash.com/photo-1518444065439-e933c06ce9cd?auto=format&fit=crop&w=800&q=80" alt="Smart Home Voice Assistant">
+            </div>
+        </div>
+
+        <div class="detail-row reverse">
+            <div class="detail-text">
+                <h3>ดีไซน์โมเดิร์น ลงตัวกับทุกมุมห้อง</h3>
+                <p>ออกแบบด้วยวัสดุรีไซเคิลที่เป็นมิตรต่อสิ่งแวดล้อม รูปทรงทรงกลมเอกลักษณ์พร้อมไฟวงแหวน LED ด้านล่าง ให้ความรู้สึกหรูหราทันสมัยประดับบ้านได้อย่างลงตัว</p>
+                <ul class="detail-list">
+                    <li>ผลิตจากเส้นใยพลาสติกรีไซเคิล 100%</li>
+                    <li>ไฟ LED วงแหวนตอบสนองตามสถานะและจังหวะเสียง</li>
+                    <li>มีให้เลือกหลากหลายโทนสีเข้ากับเฟอร์นิเจอร์</li>
+                </ul>
+            </div>
+            <div class="detail-img-box">
+                <img src="https://images.unsplash.com/photo-1507646298591-23631da294c9?auto=format&fit=crop&w=800&q=80" alt="Modern Interior Smart Speaker">
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide Presentation Callout -->
     <section class="pres-banner">
         <div class="banner-card">
-            <h2>📊 สไลด์สรุปข้อมูลรายงานและงานวิจัย</h2>
-            <p>รับชมงานนำเสนอสไลด์โชว์วิเคราะห์นวัตกรรมปัญญาประดิษฐ์ Amazon Echo รูปแบบ Interactive Slide เลื่อนดูทีละหน้าได้ทันที</p>
-            <a href="presentation.html" class="btn-primary">คลิกเปิดดูสไลด์พรีเซนท์ ❯</a>
+            <h2>📊 รายงานและสไลด์สรุปข้อมูลนวัตกรรม (AI Presentation)</h2>
+            <p>ต้องการศึกษาบทวิเคราะห์เชิงลึกและรายงานผลการศึกษาโครงการ Amazon Echo? คุณสามารถเปิดรับชมสไลด์นำเสนอรูปแบบ Interactive Slide ที่เลื่อนดูทีละหน้าได้อย่างสะดวกสบาย</p>
+            <a href="presentation.html" class="btn-primary">เปิดรับชมสไลด์พรีเซนต์ ❯</a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
         <p>© 2026 GE931 Introduction to Artificial Intelligence Project</p>
-        <p style="font-size: 0.8rem; margin-top: 5px; color: var(--accent-cyan);">Prepared by Suthatta Thanagard (2610717302036)</p>
+        <p style="font-size: 0.82rem; margin-top: 6px; color: var(--accent-cyan);">Prepared by Suthatta Thanagard (2610717302036)</p>
     </footer>
 
+    <!-- Mobile Menu Script -->
+    <script>
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
