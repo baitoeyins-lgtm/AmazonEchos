@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technology & AI | Amazon Echo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #111827;
+            --accent-cyan: #06b6d4;
+            --accent-blue: #3b82f6;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Kanit', sans-serif; }
+        body { background: var(--bg-color); color: var(--text-main); }
+        
+        nav { display: flex; justify-content: space-between; padding: 1.2rem 5%; background: rgba(11,15,25,0.8); position: fixed; width: 100%; top: 0; }
+        .logo { font-size: 1.5rem; font-weight: 700; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { display: flex; list-style: none; gap: 20px; }
+        .nav-links a { color: var(--text-main); text-decoration: none; }
+        .nav-links a.active { color: var(--accent-cyan); }
+
+        .content { padding: 120px 5% 60px; max-width: 1000px; margin: 0 auto; }
+        h1 { font-size: 2.2rem; color: var(--accent-cyan); margin-bottom: 20px; text-align: center; }
+        
+        .feature-box {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .feature-box h3 { color: var(--accent-blue); margin-bottom: 15px; }
+        .feature-box ul { padding-left: 20px; color: var(--text-muted); }
+        .feature-box li { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">AMAZON ECHO 2026</div>
+        <ul class="nav-links">
+            <li><a href="index.html">หน้าแรก</a></li>
+            <li><a href="features.html" class="active">นวัตกรรม</a></li>
+            <li><a href="products.html">สินค้า & ราคา</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <h1>สถาปัตยกรรม และ เทคโนโลยี AI</h1>
+
+        <div class="feature-box">
+            <h3>1. ชิปประมวลผล AZ3 Series (Edge Computing)</h3>
+            <p style="color: var(--text-muted);">ช่วยให้ลำโพงประมวลผลคำสั่งเสียง AI บนตัวเครื่องได้อย่างรวดเร็ว ไม่ต้องพึ่งพา Cloud ตอบสนองทันทีแบบ Real-time</p>
+        </div>
+
+        <div class="feature-box">
+            <h3>2. ระบบ Smart Home Hub Integrated</h3>
+            <ul>
+                <li>รองรับโปรโตคอล Zigbee, Matter และ Thread</li>
+                <li>ควบคุมไฟ Smart Relay, สวิตช์ และลำโพงอัจฉริยะภายในบ้าน</li>
+                <li>ตั้งค่าการทำงานอัตโนมัติ (Routines) เช่น พูดว่า "Alexa, Good Morning" เพื่อเปิดไฟและรายงานข่าว</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
