@@ -33,7 +33,7 @@
             position: relative;
         }
 
-        /* Animated Dynamic Ambient Background (ขยับเคลื่อนไหวชัดเจน) */
+        /* Animated Dynamic Ambient Background (เห็นการเคลื่อนไหวชัดเจนขึ้น 100%) */
         .ambient-bg {
             position: fixed;
             top: 0;
@@ -48,36 +48,36 @@
         .orb {
             position: absolute;
             border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.6;
-            animation: float 8s infinite ease-in-out alternate;
+            filter: blur(50px);
+            opacity: 0.65;
+            animation: float 6s infinite ease-in-out alternate;
         }
 
         .orb-1 {
-            width: 450px;
-            height: 450px;
-            background: radial-gradient(circle, var(--accent-cyan), transparent);
-            top: -5%;
-            left: -5%;
-            animation-duration: 7s;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, var(--accent-cyan), transparent 70%);
+            top: 10%;
+            left: 5%;
+            animation-duration: 5s;
         }
 
         .orb-2 {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, var(--accent-purple), transparent);
-            bottom: -5%;
-            right: -5%;
-            animation-duration: 9s;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-purple), transparent 70%);
+            bottom: 10%;
+            right: 10%;
+            animation-duration: 7s;
         }
 
         .orb-3 {
-            width: 380px;
-            height: 380px;
-            background: radial-gradient(circle, var(--accent-blue), transparent);
-            top: 35%;
-            left: 25%;
-            animation-duration: 8s;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--accent-blue), transparent 70%);
+            top: 40%;
+            left: 45%;
+            animation-duration: 6s;
         }
 
         @keyframes float {
@@ -85,10 +85,10 @@
                 transform: translate(0, 0) scale(1); 
             }
             50% { 
-                transform: translate(80px, -60px) scale(1.25); 
+                transform: translate(120px, -80px) scale(1.3); 
             }
             100% { 
-                transform: translate(-60px, 90px) scale(0.9); 
+                transform: translate(-90px, 100px) scale(0.85); 
             }
         }
 
