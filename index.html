@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazon Echo Store | Smart Home แห่งอนาคต 2026</title>
+    <title>Amazon Echo 2026 | Smart Speaker Experience</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- PDF.js Library for Custom Slide Viewer -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <style>
         :root {
             --bg-color: #060913;
@@ -13,6 +15,7 @@
             --card-border: rgba(56, 189, 248, 0.25);
             --accent-cyan: #38bdf8;
             --accent-blue: #6366f1;
+            --accent-purple: #a855f7;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
         }
@@ -28,18 +31,6 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Moving Canvas Background */
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            pointer-events: none;
         }
 
         /* Navigation */
@@ -86,242 +77,104 @@
 
         /* Hero Section */
         .hero {
-            padding: 160px 5% 70px;
+            padding: 140px 5% 40px;
             text-align: center;
-            position: relative;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 6px 16px;
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid var(--accent-cyan);
-            border-radius: 20px;
-            color: var(--accent-cyan);
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .hero h1 {
             font-size: 3rem;
             font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            background: linear-gradient(180deg, #ffffff 30%, var(--text-muted));
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
         }
 
         .hero p {
             color: var(--text-muted);
-            max-width: 650px;
-            margin: 0 auto 35px;
+            max-width: 700px;
+            margin: 0 auto 30px;
             font-size: 1.1rem;
         }
 
-        .cta-group {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
+        /* Slide Viewer Container */
+        .slide-section {
+            max-width: 950px;
+            margin: 0 auto 60px;
+            padding: 0 5%;
         }
 
-        .btn-primary {
-            padding: 12px 32px;
-            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
-            color: #fff;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
-            transition: 0.3s;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 35px rgba(56, 189, 248, 0.7);
-        }
-
-        .btn-secondary {
-            padding: 12px 32px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        /* Products Section */
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-        }
-
-        .products-section {
-            padding: 40px 5% 80px;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .product-card {
+        .slide-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 20px;
-            padding: 24px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(10px);
-            transition: 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            overflow: hidden;
+            text-align: center;
         }
 
-        .product-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-cyan);
-            box-shadow: 0 12px 35px rgba(56, 189, 248, 0.25);
-        }
-
-        .product-img-box {
+        .slide-viewer {
             width: 100%;
-            height: 230px;
-            border-radius: 14px;
-            overflow: hidden;
-            margin-bottom: 20px;
-            position: relative;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-        }
-
-        .product-img-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: 0.6s ease;
-        }
-
-        .product-card:hover .product-img-box img {
-            transform: scale(1.08);
-        }
-
-        .tag-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: rgba(6, 182, 212, 0.85);
-            color: #000;
-            font-weight: 700;
-            font-size: 0.75rem;
-            padding: 4px 10px;
+            background: #000;
             border-radius: 12px;
-            backdrop-filter: blur(5px);
-        }
-
-        .product-card h3 {
-            font-size: 1.35rem;
-            margin-bottom: 8px;
-            color: #fff;
-        }
-
-        .product-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-
-        .features-list {
-            list-style: none;
-            margin-bottom: 20px;
-        }
-
-        .features-list li {
-            font-size: 0.88rem;
-            color: #cbd5e1;
-            margin-bottom: 8px;
+            overflow: hidden;
             display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 8px;
+            min-height: 400px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .features-list li::before {
-            content: "✓";
-            color: var(--accent-cyan);
-            font-weight: bold;
+        #pdf-canvas {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
 
-        .price-row {
+        /* Slide Controls */
+        .slide-controls {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 16px;
-            margin-top: auto;
+            margin-top: 20px;
+            padding: 0 10px;
         }
 
-        .price-tag {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-cyan);
-        }
-
-        .btn-buy {
-            padding: 8px 22px;
-            background: var(--accent-cyan);
-            color: #000;
-            font-weight: 600;
-            border-radius: 20px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-
-        .btn-buy:hover {
-            background: #fff;
-            box-shadow: 0 0 15px #fff;
-        }
-
-        /* Presentation Section */
-        .presentation-section {
-            padding: 80px 5%;
-            background: rgba(10, 15, 30, 0.6);
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .pdf-frame-wrapper {
-            max-width: 950px;
-            height: 580px;
-            margin: 0 auto;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--card-border);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
+        .btn-slide {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+            color: #fff;
             border: none;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+        }
+
+        .btn-slide:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
+        }
+
+        .btn-slide:disabled {
+            background: #334155;
+            color: #64748b;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .page-info {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+
+        .page-info span {
+            color: var(--accent-cyan);
+            font-weight: 600;
         }
 
         footer {
@@ -331,18 +184,9 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             font-size: 0.9rem;
         }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .nav-links { gap: 12px; font-size: 0.85rem; }
-            .pdf-frame-wrapper { height: 380px; }
-        }
     </style>
 </head>
 <body>
-
-    <!-- Dynamic Moving Background -->
-    <canvas id="bg-canvas"></canvas>
 
     <!-- Navigation -->
     <nav>
@@ -356,95 +200,25 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <span class="badge">Next-Gen AI Assistant</span>
-        <h1>เปลี่ยนบ้านคุณให้เป็น Smart Home แห่งอนาคต</h1>
-        <p>สัมผัสประสบการณ์ลำโพงและจออัจฉริยะ Amazon Echo ประมวลผลด้วย Ambient AI ตอบสนองแม่นยำ พร้อมระบบควบคุมบ้านครบวงจร</p>
-        <div class="cta-group">
-            <a href="#products" class="btn-primary">เลือกซื้อสินค้า</a>
-            <a href="#presentation" class="btn-secondary">ชมงานนำเสนอ (PDF)</a>
-        </div>
+        <h1>สัมผัสประสบการณ์ Amazon Echo</h1>
+        <p>การนำเสนอรายงานนวัตกรรมลำโพงอัจฉริยะและระบบนิเวศปัญญาประดิษฐ์ (AI Presentation)</p>
     </section>
 
-    <!-- Products Catalog Section -->
-    <section class="products-section" id="products">
-        <h2 class="section-title">อุปกรณ์ Amazon Echo ไฮไลท์</h2>
-        <p class="section-subtitle">เลือกสรรดีไซน์และฟังก์ชั่นที่เหมาะกับไลฟ์สไตล์ดิจิทัลของคุณ</p>
-
-        <div class="product-grid">
-            
-            <!-- การ์ดที่ 1 -->
-            <div class="product-card">
-                <div>
-                    <div class="product-img-box">
-                        <span class="tag-badge">Zero-Shot AI</span>
-                        <img src="https://images.pexels.com/photos/4790262/pexels-photo-4790262.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Amazon Echo Speaker">
-                    </div>
-                    <h3>Amazon Echo Classic</h3>
-                    <p>ลำโพงอัจฉริยะทรงกระบอกยอดนิยม เสียงเบสแน่น 360 องศา พร้อมไฟวงแหวน LED ตอบรับคำสั่งเสียงทันที</p>
-                    <ul class="features-list">
-                        <li>สั่งการด้วยระบบเสียง Alexa ภาษาไทย/อังกฤษ</li>
-                        <li>เชื่อมต่ออุปกรณ์ Smart Home Hub ในตัว</li>
-                        <li>ระบบตรวจจับคลื่นเสียง Voice Wave คมชัด</li>
-                    </ul>
-                </div>
-                <div class="price-row">
-                    <span class="price-tag">฿2,990</span>
-                    <a href="checkout.html?item=Amazon Echo Classic&price=2,990" class="btn-buy">สั่งซื้อ</a>
-                </div>
+    <!-- Interactive Slide Presentation Section -->
+    <section class="slide-section">
+        <div class="slide-card">
+            <div class="slide-viewer">
+                <canvas id="pdf-canvas"></canvas>
             </div>
 
-            <!-- การ์ดที่ 2 -->
-            <div class="product-card">
-                <div>
-                    <div class="product-img-box">
-                        <span class="tag-badge">Few-Shot AI</span>
-                        <img src="https://images.pexels.com/photos/1034812/pexels-photo-1034812.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Echo Futuristic Cyberpunk">
-                    </div>
-                    <h3>Echo Futuristic 2026</h3>
-                    <p>ดีไซน์ล้ำอนาคตทรงกลมลอยตัว พร้อมไฟ Ambient Glowing คาดการณ์คำสั่งผู้ใช้ด้วย Ambient AI</p>
-                    <ul class="features-list">
-                        <li>ชิปประมวลผล AZ3 Pro (Edge Computing)</li>
-                        <li>ระบบ Ambient AI เรียนรู้พฤติกรรมอัตโนมัติ</li>
-                        <li>รองรับ Matter & Thread Ecosystem</li>
-                    </ul>
+            <!-- Slide Navigation Buttons -->
+            <div class="slide-controls">
+                <button class="btn-slide" id="prev-btn">❮ หน้าก่อนหน้า</button>
+                <div class="page-info">
+                    หน้า <span id="page-num">1</span> / <span id="page-count">--</span>
                 </div>
-                <div class="price-row">
-                    <span class="price-tag">฿6,590</span>
-                    <a href="checkout.html?item=Echo Futuristic 2026&price=6,590" class="btn-buy">สั่งซื้อ</a>
-                </div>
+                <button class="btn-slide" id="next-btn">หน้าถัดไป ❯</button>
             </div>
-
-            <!-- การ์ดที่ 3 -->
-            <div class="product-card">
-                <div>
-                    <div class="product-img-box">
-                        <span class="tag-badge">Smart Display</span>
-                        <img src="https://images.pexels.com/photos/4009402/pexels-photo-4009402.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Amazon Echo Show Display">
-                    </div>
-                    <h3>Amazon Echo Show AI Hub</h3>
-                    <p>หน้าจอสัมผัส HD แสดงผลวิดีโอ กล้องวงจรปิด ตารางงาน และควบคุมระบบรักษาความปลอดภัยทั้งบ้าน</p>
-                    <ul class="features-list">
-                        <li>หน้าจอปรับแสงตามสภาพห้องอัตโนมัติ</li>
-                        <li>ตั้งค่า Automation Routines สำหรับมือใหม่</li>
-                        <li>สวิตช์ปิดไมค์และกล้องเพื่อความเป็นส่วนตัว</li>
-                    </ul>
-                </div>
-                <div class="price-row">
-                    <span class="price-tag">฿8,290</span>
-                    <a href="checkout.html?item=Amazon Echo Show AI Hub&price=8,290" class="btn-buy">สั่งซื้อ</a>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- Presentation Section -->
-    <section class="presentation-section" id="presentation">
-        <h2 class="section-title">เอกสารนำเสนอโปรเจกต์ (Presentation)</h2>
-        <p class="section-subtitle">รายงานการศึกษาโครงสร้าง AI, สมการ Desmos และ Mermaid Diagrams</p>
-
-        <div class="pdf-frame-wrapper">
-            <iframe src="AmazonEcho_Presentation.pdf"></iframe>
         </div>
     </section>
 
@@ -453,77 +227,82 @@
         <p style="font-size: 0.8rem; margin-top: 5px; color: var(--accent-cyan);">Prepared by Suthatta Thanagard (2610717302036)</p>
     </footer>
 
-    <!-- Canvas Animation Script (Lumina Mesh Style) -->
+    <!-- PDF.js Interactive Script -->
     <script>
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
+        // PDF File Path
+        const url = 'AmazonEcho_Presentation.pdf';
 
-        let width, height;
-        let particles = [];
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
+        let pdfDoc = null,
+            pageNum = 1,
+            pageIsRendering = false,
+            pageNumIsPending = null;
 
-        window.addEventListener('resize', resize);
-        resize();
+        const canvas = document.getElementById('pdf-canvas'),
+              ctx = canvas.getContext('2d');
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.6;
-                this.vy = (Math.random() - 0.5) * 0.6;
-                this.radius = Math.random() * 2 + 1;
-            }
+        // Render Slide Page
+        const renderPage = num => {
+            pageIsRendering = true;
 
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
+            pdfDoc.getPage(num).then(page => {
+                // Set scale based on screen width
+                const viewport = page.getViewport({ scale: 1.5 });
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
 
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
-            }
+                const renderCtx = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
 
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(56, 189, 248, 0.7)';
-                ctx.fill();
-            }
-        }
+                page.render(renderCtx).promise.then(() => {
+                    pageIsRendering = false;
 
-        for (let i = 0; i < 65; i++) {
-            particles.push(new Particle());
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 130) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(99, 102, 241, ${1 - dist / 130})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
+                    if (pageNumIsPending !== null) {
+                        renderPage(pageNumIsPending);
+                        pageNumIsPending = null;
                     }
-                }
-            }
-            requestAnimationFrame(animate);
-        }
+                });
 
-        animate();
+                // Update Page Numbers & Button States
+                document.getElementById('page-num').textContent = num;
+                document.getElementById('prev-btn').disabled = (num <= 1);
+                document.getElementById('next-btn').disabled = (num >= pdfDoc.numPages);
+            });
+        };
+
+        const queueRenderPage = num => {
+            if (pageIsRendering) {
+                pageNumIsPending = num;
+            } else {
+                renderPage(num);
+            }
+        };
+
+        // Button Click Handlers
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            if (pageNum <= 1) return;
+            pageNum--;
+            queueRenderPage(pageNum);
+        });
+
+        document.getElementById('next-btn').addEventListener('click', () => {
+            if (pageNum >= pdfDoc.numPages) return;
+            pageNum++;
+            queueRenderPage(pageNum);
+        });
+
+        // Load PDF Document
+        pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
+            pdfDoc = pdfDoc_;
+            document.getElementById('page-count').textContent = pdfDoc.numPages;
+            renderPage(pageNum);
+        }).catch(err => {
+            console.error('Error loading PDF: ', err);
+            document.querySelector('.slide-viewer').innerHTML = '<p style="color:#ef4444; padding:20px;">ไม่สามารถโหลดไฟล์พรีเซนชันได้ กรุณาตรวจสอบว่ามีไฟล์ AmazonEcho_Presentation.pdf อยู่ในระบบ</p>';
+        });
     </script>
 </body>
 </html>
